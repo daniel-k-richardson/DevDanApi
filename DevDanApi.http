@@ -1,6 +1,40 @@
+@{
+    var client = new HttpClient();
+    var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:5203/login");
+    request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
+    {
+        { "username", "your-username" },
+        { "password", "your-password" }
+    });
+    var response = await client.SendAsync(request);
+    response.EnsureSuccessStatusCode();
+    var bearerToken = await response.Content.ReadAsStringAsync();
+}
+
+@bearerToken=Bearer
+@{bearerToken}
+
 @DevDanApi_HostAddress = http://localhost:5203
 
-GET {{DevDanApi_HostAddress}}/weatherforecast/
-Accept: application/json
+# @name login
+POST {{DevDanApi_HostAddress}}/login/
+Content-Type: application/json
 
+{
+  "email": "daniel@unimicro.no",
+  "password": "Password@123"
+}
+
+@authtoken = {{login.response.headers.X-AuthToken}}
+
+###
+
+
+POST {{DevDanApi_HostAddress}}/Blog
+Authorization: Bearer {{bearerToken}}
+Content-Type: application/json
+
+{
+
+}
 ###

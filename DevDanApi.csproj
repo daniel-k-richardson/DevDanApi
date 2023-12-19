@@ -29,9 +29,6 @@
 
   <ItemGroup>
     <Folder Include="Domain\Enums\" />
-    <Folder Include="Features\Blogs\DeleteBlog\" />
-    <Folder Include="Features\Blogs\GetBlogs\" />
-    <Folder Include="Features\Blogs\GetBlog\" />
     <Folder Include="Features\Blogs\UpdateBlog\" />
     <Folder Include="Infrastructure\HostedServices\" />
   </ItemGroup>

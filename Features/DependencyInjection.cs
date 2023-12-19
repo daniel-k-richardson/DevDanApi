@@ -1,6 +1,7 @@
 ﻿using Carter;
 using DevDanApi.Domain.Entities;
 using DevDanApi.Features.Blogs.CreateBlog;
+using DevDanApi.Features.Blogs.DeleteBlog;
 using DevDanApi.Features.Common.Validation;
 using FluentValidation;
 
@@ -16,7 +17,8 @@ public static class DependencyInjection
 
         services.AddMediatR(configuration =>
             configuration.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly)
-            .AddValidation<CreateBlogCommand, Blog>());
+            .AddValidation<CreateBlogCommand, Blog>()
+            .AddValidation<DeleteBlogCommand, bool>());
 
         services.AddAutoMapper(typeof(DependencyInjection));
 

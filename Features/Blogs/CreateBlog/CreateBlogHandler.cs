@@ -1,4 +1,5 @@
 ﻿
+using AutoMapper;
 using DevDanApi.Domain.Entities;
 using DevDanApi.Infrastructure.Data;
 using LanguageExt.Common;
@@ -9,15 +10,22 @@ namespace DevDanApi.Features.Blogs.CreateBlog;
 public class CreateBlogHandler : IRequestHandler<CreateBlogCommand, Result<Blog>>
 {
     private readonly AppDbContext _appDbContext;
+    private readonly IMapper _mapper;
 
-    public CreateBlogHandler(AppDbContext appDbContext)
+    public CreateBlogHandler(
+        AppDbContext appDbContext,
+        IMapper mapper)
     {
         _appDbContext = appDbContext;
+        _mapper = mapper;
     }
 
-    public async Task<Result<Blog>> Handle(CreateBlogCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Blog>> Handle(
+        CreateBlogCommand request,
+        CancellationToken cancellationToken)
     {
-        _appDbContext.Add(request.blog);
+        var blog = _mapper.Map<Blog>(request.blog);
+        await _appDbContext.AddAsync(request.blog, cancellationToken);
 
         try
         {
@@ -27,8 +35,7 @@ public class CreateBlogHandler : IRequestHandler<CreateBlogCommand, Result<Blog>
         {
             return new Result<Blog>(ex);
         }
-        
-        return request.blog;
 
+        return blog;
     }
 }
