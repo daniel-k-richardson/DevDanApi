@@ -12,12 +12,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddFeatures(this IServiceCollection services)
     {
-        var assembly = typeof(DependencyInjection).Assembly;
 
-        services.AddValidatorsFromAssembly(assembly, ServiceLifetime.Scoped);
+        services.AddValidatorsFromAssembly(typeof(Program).Assembly, ServiceLifetime.Transient);
 
         services.AddMediatR(configuration =>
-            configuration.RegisterServicesFromAssembly(assembly)
+            configuration.RegisterServicesFromAssembly(typeof(Program).Assembly)
             .AddValidation<CreateBlogCommand, Blog>()
             .AddValidation<DeleteBlogCommand, bool>()
             .AddValidation<UpdateBlogCommand, Blog>()
