@@ -15,6 +15,6 @@ public class CreateBlogEndpoint : ICarterModule
             return result.Match(Succ: blog => Results.Ok(blog),
                 Fail: ex => Results.BadRequest(ex.Data.ToString()));
 
-        }).RequireAuthorization();
+        });
     }
 }

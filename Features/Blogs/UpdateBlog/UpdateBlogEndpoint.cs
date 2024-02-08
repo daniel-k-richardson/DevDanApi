@@ -16,6 +16,6 @@ public class UpdateBlogEndpoint : ICarterModule
                 Succ: blog => Results.Ok(blog),
                 Fail: ex => Results.BadRequest(ex.Data.ToString()));
 
-        }).RequireAuthorization();
+        });
     }
 }

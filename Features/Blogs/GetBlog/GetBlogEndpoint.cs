@@ -14,7 +14,7 @@ public class GetBlogEndpoint : ICarterModule
             return result.Match(
                 Succ: blog => blog is null ? Results.NotFound() : Results.Ok(blog),
                 Fail: ex => Results.BadRequest(ex.Data.ToString()));
-        }).RequireAuthorization();
+        });
     }
 }
 
