@@ -4,12 +4,10 @@ using MediatR;
 
 namespace DevDanApi.Features.Common.Validation;
 
-public class ValidationBehavior<TRequest, TResult> : IPipelineBehavior<TRequest, Result<TResult>>
+public class ValidationBehavior<TRequest, TResult>(IValidator<TRequest> validator) : IPipelineBehavior<TRequest, Result<TResult>>
     where TRequest : notnull
 {
-    private readonly IValidator<TRequest> _validator;
-
-    public ValidationBehavior(IValidator<TRequest> validator) => _validator = validator;
+    private readonly IValidator<TRequest> _validator = validator;
 
     public async Task<Result<TResult>> Handle(
         TRequest request,

@@ -4,4 +4,4 @@ using MediatR;
 
 namespace DevDanApi.Features.Blogs.CreateBlog;
 
-public sealed record CreateBlogCommand(CreateBlog blog) : IRequest<Result<Blog>>;
+public sealed record CreateBlogCommand(Blog Blog) : IRequest<Result<Blog>>;

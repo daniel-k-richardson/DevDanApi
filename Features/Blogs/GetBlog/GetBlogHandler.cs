@@ -5,17 +5,12 @@ using MediatR;
 
 namespace DevDanApi.Features.Blogs.GetBlog;
 
-public class GetBlogHandler : IRequestHandler<GetBlogQuery, Result<Blog?>>
+public class GetBlogHandler(AppDbContext appDbContext) : IRequestHandler<GetBlogQuery, Result<Blog?>>
 {
-    private readonly AppDbContext _appDbContext;
-
-    public GetBlogHandler(AppDbContext appDbContext)
-    {
-        _appDbContext = appDbContext;
-    }
+    private readonly AppDbContext _appDbContext = appDbContext;
 
     public async Task<Result<Blog?>> Handle(GetBlogQuery request, CancellationToken cancellationToken)
     {
-        return await _appDbContext.Blogs.FindAsync(request.blogId, cancellationToken);
+        return await _appDbContext.Blogs.FindAsync(request.BlogId, cancellationToken);
     }
 }

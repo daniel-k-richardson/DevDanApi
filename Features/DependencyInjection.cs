@@ -14,16 +14,15 @@ public static class DependencyInjection
     {
         var assembly = typeof(DependencyInjection).Assembly;
 
-        services.AddValidatorsFromAssembly(assembly, ServiceLifetime.Transient);
+        services.AddValidatorsFromAssembly(assembly, ServiceLifetime.Scoped);
 
         services.AddMediatR(configuration =>
-            configuration.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly)
+            configuration.RegisterServicesFromAssembly(assembly)
             .AddValidation<CreateBlogCommand, Blog>()
             .AddValidation<DeleteBlogCommand, bool>()
             .AddValidation<UpdateBlogCommand, Blog>()
             );
 
-        services.AddAutoMapper(typeof(DependencyInjection));
 
         services.AddCarter();
 

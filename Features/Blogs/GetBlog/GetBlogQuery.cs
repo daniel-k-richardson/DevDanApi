@@ -4,4 +4,4 @@ using MediatR;
 
 namespace DevDanApi.Features.Blogs.GetBlog;
 
-public sealed record GetBlogQuery(int blogId) : IRequest<Result<Blog?>>;
+public sealed record GetBlogQuery(int BlogId) : IRequest<Result<Blog?>>;

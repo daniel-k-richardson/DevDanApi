@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Domain\Enums\**" />
+    <Content Remove="Domain\Enums\**" />
+    <EmbeddedResource Remove="Domain\Enums\**" />
+    <None Remove="Domain\Enums\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Carter" Version="8.0.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
@@ -28,9 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Enums\" />
     <Folder Include="Features\Blogs\UpdateBlog\" />
-    <Folder Include="Infrastructure\HostedServices\" />
   </ItemGroup>
 
 </Project>

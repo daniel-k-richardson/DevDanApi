@@ -6,15 +6,15 @@ public class CreateBlogValidator : AbstractValidator<CreateBlogCommand>
 {
     public CreateBlogValidator()
     {
-        RuleFor(x => x.blog)
+        RuleFor(x => x.Blog)
             .NotNull()
             .WithMessage("Blog cannot be null");
 
-        RuleFor(x => x.blog.Title)
+        RuleFor(x => x.Blog.Title)
             .NotEmpty()
             .WithMessage("Title cannot be empty");
 
-        RuleFor(x => x.blog.Content)
+        RuleFor(x => x.Blog.Content)
             .NotEmpty()
             .WithMessage("Content cannot be empty");
     }
