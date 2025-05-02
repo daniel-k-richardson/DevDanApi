@@ -4,4 +4,4 @@ obj/
 .git/
 /packages/
 riderModule.iml
-/_ReSharper.Caches/
+/_ReSharper.Caches
