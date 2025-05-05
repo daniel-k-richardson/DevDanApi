@@ -7,6 +7,12 @@ jobs:
   precheck:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -30,18 +36,18 @@ jobs:
     needs: [precheck]
     
     steps:
-      - name: Download source code
-        uses: actions/download-artifact@v4
-        with:
-          name: source-code
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore
+      - name: Download source code
+        uses: actions/download-artifact@v4
+        with:
+          name: source-code
+          
+      - name: Build
+        run: dotnet build --configuration Release
 
       - name: create artifact
         uses: actions/upload-artifact@v4
