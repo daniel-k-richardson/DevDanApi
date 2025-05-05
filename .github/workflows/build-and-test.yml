@@ -14,11 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dotnet-analyzers
-        run: dotnet tool install --global dotnet-analyzers
-
-      - name: Run static code analysis
-        run: dotnet-analyzers analyze . --severity error
+      - name: Install dotnet-format
+        run: dotnet tool install --global dotnet-format
 
       - name: Verify formatting
         run: dotnet format . --verify-no-changes --severity error -v m
