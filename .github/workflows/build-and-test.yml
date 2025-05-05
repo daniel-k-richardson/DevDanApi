@@ -44,7 +44,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: build-output
+          name: source-code
 
       - name: Run tests
         run: dotnet test --no-restore --verbosity normal
