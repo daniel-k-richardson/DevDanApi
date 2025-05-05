@@ -23,7 +23,7 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore --output ./output
+        run: dotnet build --configuration Release --no-restore
 
       - name: Run tests
         run: dotnet test --no-restore --verbosity normal
@@ -32,4 +32,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: 'artifact'
-          path: ./output
+          path: ./src/**/bin/Release/net9.0
