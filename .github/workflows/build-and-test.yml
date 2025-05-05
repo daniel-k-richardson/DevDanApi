@@ -1,10 +1,6 @@
 name: build-and-test
 
-on:
-  push:
-    branches:
-  pull_request:
-    branches:
+on: [push]
 
 jobs:
   build:
@@ -18,7 +14,11 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.0.x'
-
+      
+      - name: Verify formatting
+        run: dotnet format . --verify-no-changes --severity error -v m
+        continue-on-error: false
+                                                            
       - name: Restore dependencies
         run: dotnet restore
 
