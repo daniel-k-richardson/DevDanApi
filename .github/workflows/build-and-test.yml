@@ -49,7 +49,10 @@ jobs:
           name: source-code
 
       - name: Run tests
-        run: dotnet test --no-restore --verbosity normal --parallel
+        run: dotnet test --no-restore --verbosity normal
+
+      - name: Collect code coverage
+        run: dotnet test --collect:"XPlat Code Coverage"
   
   build:
     runs-on: ubuntu-latest
