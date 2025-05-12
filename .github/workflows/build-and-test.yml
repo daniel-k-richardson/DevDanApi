@@ -49,7 +49,7 @@ jobs:
           name: source-code
 
       - name: Run tests
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test --no-restore --verbosity normal --parallel
   
   build:
     runs-on: ubuntu-latest
@@ -67,12 +67,20 @@ jobs:
           
       - name: Build
         run: dotnet build --configuration Release
+        
+      - name: Cache NuGet packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+              ${{ runner.os }}-nuget-
 
       - name: create artifact
         uses: actions/upload-artifact@v4
         with: 
           name: build-output
-          path: .
+          path: ./
   
   publish:
     runs-on: ubuntu-latest
@@ -101,3 +109,10 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+          
+  notifications:
+    runs-on: ubuntu-latest
+    needs: [ publish ]
+    steps:
+      - name: Notify on success
+        run: echo "Pipeline completed successfully!"
