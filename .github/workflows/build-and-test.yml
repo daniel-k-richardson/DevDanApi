@@ -3,7 +3,7 @@ name: build-and-test
 on: [push]
 
 env:
-  AZURE_WEBAPP_NAME: current-time-service
+  AZURE_WEBAPP_NAME: TestingDevDan
   AZURE_WEBAPP_PACKAGE_PATH: "./publish"
 
 jobs:
@@ -63,6 +63,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: source-code
+          path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
 
       - name: Restore
         run: dotnet restore ./src/DevDanApi.Api
@@ -92,11 +93,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-output
+          path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: TestingDevDan # Replace with your Azure Web App name
-          slot-name: production
+          app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your Azure Web App name
           publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
