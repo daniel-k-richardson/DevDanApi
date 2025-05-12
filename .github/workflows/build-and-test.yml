@@ -66,10 +66,10 @@ jobs:
           path: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
 
       - name: Restore
-        run: dotnet restore ./src/DevDanApi.Api
+        run: dotnet restore .
           
       - name: Build
-        run: dotnet build ./src/DevDanApi.Api --configuration Release --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        run: dotnet build . --configuration Release --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
 
       - name: create artifact
         uses: actions/upload-artifact@v4
