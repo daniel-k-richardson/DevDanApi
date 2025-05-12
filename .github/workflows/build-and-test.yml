@@ -62,6 +62,9 @@ jobs:
           
       - name: Build
         run: dotnet build --configuration Release
+        
+      - name: Debug Build Output
+        run: ls -R ./src/**/bin/Release/
 
       - name: create artifact
         uses: actions/upload-artifact@v4
