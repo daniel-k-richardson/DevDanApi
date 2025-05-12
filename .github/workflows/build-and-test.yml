@@ -95,4 +95,4 @@ jobs:
           app-name: TestingDevDan # Replace with your Azure Web App name
           slot-name: production
           publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
-          package: ./src/**/bin/Release/
+          package: ./src/DevDanApi.Api/bin/Release/:net9.0
