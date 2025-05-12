@@ -22,7 +22,7 @@ jobs:
         run: dotnet tool install --global dotnet-format
 
       - name: Verify formatting
-        run: dotnet format . --verify-no-changes --severity error -v m
+        run: dotnet format --verify-no-changes --severity error -v m
         continue-on-error: false
         
       - name: Upload source code
@@ -69,7 +69,7 @@ jobs:
         run: dotnet restore .
           
       - name: Build
-        run: dotnet build . --configuration Release --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        run: dotnet build --configuration Release --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
 
       - name: create artifact
         uses: actions/upload-artifact@v4
