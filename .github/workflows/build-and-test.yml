@@ -76,21 +76,24 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     needs: [build]
-    
+  
     steps:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.0.x'
-
+  
       - name: Download source code
         uses: actions/download-artifact@v4
         with:
           name: source-code
-          
-      - name: Publish
-        run: dotnet publish --configuration Release --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
-      
+  
+      - name: Restore dependencies
+        run: dotnet restore DevDanApi.sln
+  
+      - name: Publish API
+        run: dotnet publish ./src/DevDanApi.Api/DevDanApi.Api.csproj --configuration Release --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+  
       - name: Deployment
         uses: azure/webapps-deploy@v2
         with:
